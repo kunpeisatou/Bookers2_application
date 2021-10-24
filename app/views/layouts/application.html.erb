@@ -20,10 +20,17 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarNavDropdown">
            <ul class="navbar-nav ml-auto">
+             <% if user_signed_in? %>
              <li><a class="fas fa-home nav-link text-light" href="/users/31783"> Home</a></li>
              <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
              <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
              <li><a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out"> Log out</a></li>
+             <% else %>
+             <li><a class="fas fa-home nav-link text-light" href="/"> Home</a></li>
+             <li><a class="fas fa-link nav-link text-light" href="/home/about"> About</a></li>
+             <li><a class="fas fa-user-plus nav-link text-light" href="/users/sign_up"> Sign up</a></li>
+             <li><a class="fas fa-sign-in-alt nav-link text-light" href="/users/sign_in"> Log in</a></li>
+             <% end %>
            </ul>
          </div>
        </div>
