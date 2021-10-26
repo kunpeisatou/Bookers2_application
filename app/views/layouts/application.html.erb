@@ -21,7 +21,7 @@
          <div class="collapse navbar-collapse" id="navbarNavDropdown">
            <ul class="navbar-nav ml-auto">
              <% if user_signed_in? %>
-             <li><a class="fas fa-home nav-link text-light" href="/users/@user"> Home</a></li>
+             <li><%= link_to " Home", user_path(current_user.id) ,class:"fas fa-users nav-link text-light"%></li>
              
              <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
              <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
