@@ -14,25 +14,30 @@
 
 <!-- Bookers2 -->
 <main>
-  <p id="notice"></p>
+  <p id="notice"><%= flash[:notice] %></p>
   <div class='container px-5 px-sm-0'>
    <div class='row'>
      <div class='col-md-3'>
        <h2>User info</h2>
        <table class='table'>
-         <tr><img class="attachment user profile_image fallback" src="/assets/no_image-72379a4da21cb04a58337cf92d85bc39f8d534cbc78254c2085acaca82236bfa.jpg" /></tr>
+         <!-- 画像 -->
+         <tr><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></tr>
          <tr>
            <th>name</th>
-           <th>123456</th>
+           <th><%= @user.name %></th>
          </tr>
          <tr>
            <th>introduction</th>
            <th></th>
          </tr>
        </table>
-       <div class='row'>
-         <a class="btn btn-outline-secondary btn-block fas fa-user-cog edit_user_33574" href="/users/33574/edit"></a>
-       </div>
+       <% if @user.id == current_user.id %>
+   　　    <div class='row'>
+   　　      <!-- 編集ボタン-->
+   　　      <a class="btn btn-outline-secondary btn-block fas fa-user-cog edit_user_33574" href="/users/33574/edit"></a>
+    　　     </div>
+   　　   <% end %>
+   　　   <!-- 投稿フォーム -->
        <h2 class="mt-3">New book</h2>
        <form action="/books" accept-charset="UTF-8" method="post">
          <input name="utf8" type="hidden" value="&#x2713;" />
@@ -50,6 +55,7 @@
          </div>
        </form>
      </div>
+       <!-- 投稿一覧 -->
      <div class='col-md-8 offset-md-1'>
        <h2>Books</h2>
        <table class='table table-hover table-inverse'>
@@ -62,6 +68,28 @@
            </tr>
          </thead>
          <tbody>
+           <tr>
+             <td>
+               <a href="/users/33592">
+               <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" />
+               </a>
+             </td>
+             <td>
+               <a class="book_26710" href="/books/26710">テスト</a>
+             </td>
+             <td>テスト</td>
+           </tr>
+           <tr>
+             <td>
+               <a href="/users/33592">
+               <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" />
+               </a>
+             </td>
+             <td>
+               <a class="book_26711" href="/books/26711">テスト2</a>
+             </td>
+             <td>テスト２</td>
+           </tr>
          </tbody>
        </table>
      </div>
