@@ -10,7 +10,7 @@
 
 <!-- ここから -->
 <!-- ここまで切り取り -->
-<%= render 'books/list', post_images: @post_images %>
+<%= render 'books/list', post_images: @books %>
 
 <!-- Bookers2 -->
 <main>
@@ -19,6 +19,7 @@
    <div class='row'>
      <div class='col-md-3'>
        <h2>User info</h2>
+       <!-- プロフィール -->
        <table class='table'>
          <!-- 画像 -->
          <tr><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></tr>
@@ -28,7 +29,7 @@
          </tr>
          <tr>
            <th>introduction</th>
-           <th></th>
+           <th><%= @user.introduction%></th>
          </tr>
        </table>
        <% if @user.id == current_user.id %>
