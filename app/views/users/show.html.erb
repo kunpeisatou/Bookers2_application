@@ -2,8 +2,10 @@
 <main>
   <p id="notice"><%= flash[:notice] %></p>
   <div class='container px-5 px-sm-0'>
+   
    <div class='row'>
      <div class='col-md-3'>
+      <!-- プロフィール&投稿 -->
       <%= render 'books/list', books: @books %>
      </div>
      
@@ -28,9 +30,11 @@
                <% end %>
              </td>
              <td>
-               <a class="book_26710" href="/books/26710">テスト</a>
+               <%= link_to book_path(current_user.id) do %>
+                 <%= book.title %>
+               <% end %>
              </td>
-             <td>テスト</td>
+             <td><%= book.body %></td>
            </tr>
            <% end %>
          </tbody>
