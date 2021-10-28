@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   end
   
   def index
-    @user = User.page(params[:page]).reverse_order
-    @books = Book.page(params[:page]).reverse_order
+    @user = current_user
+    @books = @user.books.page(params[:page]).reverse_order
+    @book = Book.new
   end
   
   def edit
