@@ -45,19 +45,11 @@
                <% end %>
              </td>
              <td>
-               <%= link_to book_path(book.user) do %>
+               <%= link_to book_path(book.id) do %>
                  <%= book.title %>
                <% end %>
              </td>
              <td><%= book.body %></td>
-             <!-- 編集 -->
-              <% if @user.id == current_user.id %>
-                <td>
-                    <%= link_to"Edit",edit_book_path(current_user.id) ,class:"btn btn-sm btn-success edit_book_27283"%>
-                </td>
-                <td><a data-confirm="本当に消しますか？" class="btn btn-sm btn-danger destroy_book_27283" rel="nofollow" data-method="delete" href="/books/27283">Destroy</a></td>
-              <% end %>
-             <!-- 編集ここまで -->
            </tr>
            <% end %>
          </tbody>
