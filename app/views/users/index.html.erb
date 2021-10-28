@@ -20,31 +20,13 @@
              </tr>
            </thead>
            <tbody>
+             <% @users.each do |user| %>
              <tr>
-               <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" /></td>
-               <td>Olivia</td>
-               <td><a class="user_33922" href="/users/33922">Show</a></td>
+               <td><%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %></td>
+               <td><%= user.name %></td>
+               <td><%= link_to"Show",user_path(user.id) ,class:"user_33922"%></td>
              </tr>
-             <tr>
-               <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" /></td>
-               <td>サンプルタロウ</td>
-               <td><a class="user_33923" href="/users/33923">Show</a></td>
-             </tr>
-             <tr>
-               <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" /></td>
-               <td>Lucas</td>
-               <td><a class="user_33924" href="/users/33924">Show</a></td>
-             </tr>
-             <tr>
-               <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" /></td>
-               <td>あいう</td>
-               <td><a class="user_33925" href="/users/33925">Show</a></td>
-             </tr>
-             <tr>
-               <td><img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg" /></td>
-               <td>123456</td>
-               <td><a class="user_33926" href="/users/33926">Show</a></td>
-             </tr>
+             <% end %>
            </tbody>
          </table>
        </div>

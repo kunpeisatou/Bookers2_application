@@ -19,15 +19,24 @@ class BooksController < ApplicationController
   def index
     #@post_images = PostImage.allを削除。左記の場合全ての画像を表示してしまうため。
     @books = Book.page(params[:page]).reverse_order
-
     @user = current_user
-    @new_book = Book.new
+    @book = Book.new
   end
 
   def show
     @book = Book.find(params[:id])
 
     @new_book = Book.new
+  end
+
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
+    redirect_to book_path(@book.id)
   end
 
   def destroy
