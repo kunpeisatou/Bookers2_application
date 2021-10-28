@@ -7,9 +7,11 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-      redirect_to books_path
+      flash[:notice] = 'You have created book successfully.'
+      redirect_to book_path(@book.id)
     else
-      render :new
+      render :index
+      
     end
     
   end
@@ -17,12 +19,14 @@ class BooksController < ApplicationController
   def index
     #@post_images = PostImage.allを削除。左記の場合全ての画像を表示してしまうため。
     @books = Book.page(params[:page]).reverse_order
-    @user = User.page(params[:page]).reverse_order
+    @user = current_user
+    @book = Book.new
   end
 
   def show
     @book = Book.find(params[:id])
-    @user = User.find(params[:id])
+    @user = current_user
+    @book = Book.new
   end
 
   def destroy
