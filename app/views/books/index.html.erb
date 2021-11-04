@@ -51,6 +51,9 @@
                <td>
                  <%= book.body %>
                </td>
+               <td>
+                 <p><%= link_to "#{book.post_comments.count} コメント", book_path(book.id) %></p>
+               </td>
              </tr>
              <% end %>
            </tbody>
