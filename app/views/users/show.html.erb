@@ -50,6 +50,11 @@
                <% end %>
              </td>
              <td><%= book.body %></td>
+             <!-- コメント数表示 -->
+             <td>
+              <p><%= "コメント数：#{book.post_comments.count}" %></p>
+             </td>
+             <!-- コメント数表示ここまで -->
            </tr>
            <% end %>
          </tbody>
