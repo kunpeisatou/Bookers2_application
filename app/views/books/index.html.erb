@@ -51,9 +51,28 @@
                <td>
                  <%= book.body %>
                </td>
+               <!-- いいね機能 -->
                <td>
-                 <p><%= link_to "#{book.post_comments.count} コメント", book_path(book.id) %></p>
+                  <% if book.favorited_by?(current_user) %>
+                    <p>
+                     <%= link_to book_favorites_path(book), method: :delete , class:"favorited" do %>
+                      ♥<%= book.favorites.count %> いいね
+                     <% end %>
+                    </p>
+                  <% else %>
+                    <p>
+                     <%= link_to book_favorites_path(book), method: :post do %>
+                      ♡<%= book.favorites.count %> いいね
+                     <% end %>
+                    </p>
+                  <% end %>
                </td>
+               <!-- いいね機能ここまで -->
+               <!-- コメント数表示 -->
+               <td>
+                 <p><%= "コメント数：#{book.post_comments.count}" %></p>
+               </td>
+               <!-- コメント数表示ここまで -->
              </tr>
              <% end %>
            </tbody>

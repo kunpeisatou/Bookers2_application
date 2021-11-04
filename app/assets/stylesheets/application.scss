@@ -24,3 +24,11 @@
 }
 
 #error_explanation { color: red; }
+
+.favorited { color: red; }
+
+.comments { 
+    display: flex;
+    align-items: flex-end; 
+    
+}

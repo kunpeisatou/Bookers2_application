@@ -8,9 +8,9 @@
       <%= render 'books/list', user: @book.user,book: @new_book %>
      </div>
      
-     <!-- 投稿一覧 -->
      <div class='col-md-8 offset-md-1'>
        <h2>Book detail</h2>
+       <!-- 投稿詳細 -->
        <table class='table'>
            <tr>
              <td>
@@ -25,19 +25,6 @@
                <% end %>
              </td>
              <td><%= @book.body %></td>
-             
-             <!-- 編集 -->
-              <% if @book.user.id == current_user.id %>
-                <td>
-                    <%= link_to"Edit",edit_book_path(@book.id) ,class:"btn btn-sm btn-success edit_book_27283"%>
-                </td>
-                <td>
-                 
-                <%= link_to "Destroy", book_path(@book.id), method: :delete , data: {confirm: "本当に消しますか？"}, class:"btn btn-sm btn-danger"%>
-                </td>
-              <% end %>
-             <!-- 編集ここまで -->
-             
              
              <!-- いいね -->
              <td>
@@ -56,37 +43,50 @@
              <% end %>
              </td>
              <!-- いいねここまで -->
-             
-             
-             <!-- コメント -->
-             
-              <td><p>コメント件数：<%= @book.post_comments.count %></p></td>
+             <!-- コメント数 -->
+             <td><p>コメント件数：<%= @book.post_comments.count %></p></td>
+             <!-- 編集 -->
+              <% if @book.user.id == current_user.id %>
+                <td>
+                 <%= link_to"Edit",edit_book_path(@book.id) ,class:"btn btn-sm btn-success edit_book_27283"%>
+                </td>
+                <td>
+                 <%= link_to "Destroy", book_path(@book.id), method: :delete , data: {confirm: "本当に消しますか？"}, class:"btn btn-sm btn-danger"%>
+                </td>
+              <% end %>
+             <!-- 編集ここまで -->
+           </tr> 
+       </table>
+       <!-- 投稿詳細ここまで -->
+       
+       <table class='table'>
+       <!-- コメント一覧 -->
+           <tr>
               <td>
                  <% @book.post_comments.each do |post_comment| %>
-                   <p><%= image_tag('sample-author1.jpg') %></p>
-                   <%= post_comment.user.name %>
-                   <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+                  <div class="comments">
+                   <%= attachment_image_tag post_comment.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+                   <%= post_comment.comment %>
                    <% if post_comment.user == current_user %>
-                     <div>
-                      <%= link_to "削除", book_post_comment_path(post_comment.book, post_comment), method: :delete %>
-                     </div>
+                      <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class:"btn btn-sm btn-danger" %>
+                   <% end %>
+                  </div>
+                   <%= link_to user_path(post_comment.user) do %>
+                     <%= post_comment.user.name %>
                    <% end %>
                  <% end %>
               </td>
-             
-             <td>
-              <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-               <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-               <%= f.submit "送信する" %>
-              <% end %>
-              </td>
-             
-             
-             
-             
-             <!-- コメントここまで -->
-           </tr>
+            </tr>
+       <!-- コメント一覧ここまで -->
        </table>
+            <!-- コメント投稿 -->
+             <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
+               <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class:'col-md-12'  %>
+               <div>
+                <%= f.submit "送信する" %>
+               </div>
+             <% end %>
+            <!-- コメント投稿ここまで -->
      </div>
    </div>
   </div>
