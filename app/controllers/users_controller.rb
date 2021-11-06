@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user = current_user
     @books = @user.books.page(params[:page]).reverse_order
     @book = Book.new
+    
   end
   
   def edit
@@ -42,8 +43,18 @@ class UsersController < ApplicationController
       @user = User.page(params[:page]).reverse_order
       render :index
     end
-    
   end
+  
+  def follower
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+  
+  def followed
+    user = User.find(params[:id])
+    @users = user.followeds
+  end
+  
   
   private
 
