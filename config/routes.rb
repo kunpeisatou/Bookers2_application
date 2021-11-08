@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
+  
   resources :books, only: [:new, :create, :index, :show, :destroy, :edit, :update]do
      resource :favorites, only: [:create, :destroy]
      resources :post_comments, only: [:create, :destroy]
@@ -13,5 +14,7 @@ Rails.application.routes.draw do
     get :follower, on: :member
     get :followed, on: :member
   end
+  
+  get '/search', to: 'searchs#search'
   
 end
