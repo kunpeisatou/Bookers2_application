@@ -26,22 +26,11 @@
              <td><%= @book.body %></td>
              
              <!-- いいね -->
-             <td>
-             <% if @book.favorited_by?(current_user) %>
-              <p>
-               <%= link_to book_favorites_path(@book), method: :delete do %>
-                ♥<%= @book.favorites.count %> いいね
-               <% end %>
-              </p>
-             <% else %>
-              <p>
-               <%= link_to book_favorites_path(@book), method: :post do %>
-                ♡<%= @book.favorites.count %> いいね
-               <% end %>
-              </p>
-             <% end %>
+             <td class="favorite-btn" id="favorite_btn_<%= @book.id%>">
+              <%= render 'favorites/favorite-btn', book: @book %>
              </td>
              <!-- いいねここまで -->
+             
              <!-- コメント数 -->
              <td><p>コメント件数：<%= @book.post_comments.count %></p></td>
              <!-- 編集 -->
@@ -58,8 +47,8 @@
        </table>
        <!-- 投稿詳細ここまで -->
        
-       <table class='table'>
        <!-- コメント一覧 -->
+       <table class='table'>
            <tr>
               <td>
                  <% @book.post_comments.each do |post_comment| %>
@@ -76,8 +65,8 @@
                  <% end %>
               </td>
             </tr>
-       <!-- コメント一覧ここまで -->
        </table>
+       <!-- コメント一覧ここまで -->
             <!-- コメント投稿 -->
              <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
                <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class:'col-md-12'  %>

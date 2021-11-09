@@ -51,28 +51,19 @@
                <td>
                  <%= book.body %>
                </td>
+               
                <!-- いいね機能 -->
-               <td>
-                  <% if book.favorited_by?(current_user) %>
-                    <p>
-                     <%= link_to book_favorites_path(book), method: :delete , class:"favorited" do %>
-                      ♥<%= book.favorites.count %> いいね
-                     <% end %>
-                    </p>
-                  <% else %>
-                    <p>
-                     <%= link_to book_favorites_path(book), method: :post do %>
-                      ♡<%= book.favorites.count %> いいね
-                     <% end %>
-                    </p>
-                  <% end %>
+               <td class="favorite-btn" id="favorite_btn_<%= book.id%>"><!-- id=内にてbook.idを指定することでページ全てのいいね欄に反映される事を防ぐ（idタグはページに１回しか使えない規則を利用） -->
+                  <%= render 'favorites/favorite-btn', book: book %>
                </td>
                <!-- いいね機能ここまで -->
+               
                <!-- コメント数表示 -->
                <td>
                  <p><%= "コメント数：#{book.post_comments.count}" %></p>
                </td>
                <!-- コメント数表示ここまで -->
+               
              </tr>
              <% end %>
            </tbody>

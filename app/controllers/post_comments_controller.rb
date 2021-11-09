@@ -5,6 +5,7 @@ class PostCommentsController < ApplicationController
     comment.book_id = book.id
     comment.save
     redirect_to book_path(book)
+    #redirect_to book_path(book)を削除
   end
 
   def destroy
